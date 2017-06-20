@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CarleysCateringController">
+   <children>
+    <AnchorPane centerShape="false" minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="1220.0" style="-fx-background-color: BLUE;" visible="false" />
+      <SplitPane layoutX="491.0" layoutY="265.0" orientation="VERTICAL" prefHeight="900.0" prefWidth="1222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="862.0" prefWidth="1220.0">
+               <children>
+                  <ImageView layoutX="-4.0" smooth="false">
+                     <image>
+                        <Image url="@Catering_Image.jpg" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="labelText" alignment="TOP_LEFT" disable="true" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.51" prefHeight="1078.0" prefWidth="1918.0" text="CARLEY'S CATERING SERVICE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Castellar" size="70.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <effect>
+                        <ColorAdjust brightness="-0.03" contrast="0.51" hue="0.77" saturation="-0.53" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                  </TextField>
+                  <VBox layoutX="1082.0" layoutY="758.0" prefHeight="75.0" prefWidth="130.0" spacing="25.0" stylesheets="@Login.css">
+                     <children>
+                        <Button fx:id="btnFreeEstimate" layoutX="1093.0" layoutY="753.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="35.0" prefWidth="130.0" text="Free Estimate" />
+                        <Button layoutX="1093.0" layoutY="817.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="132.0" text="Create an Event" />
+                     </children>
+                  </VBox>
+                  <Label layoutX="-2.0" layoutY="726.0" prefHeight="175.0" prefWidth="1079.0" text="   Carly's makes the food that makes it a party ">
+                     <font>
+                        <Font name="Bodoni MT Condensed" size="82.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
