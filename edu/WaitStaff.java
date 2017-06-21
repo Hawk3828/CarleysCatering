@@ -17,9 +17,6 @@ public class WaitStaff extends Employee {
 	}
 	
 	public static void main(String[] args) {
-//		WaitStaff ws = new WaitStaff();
-//		System.out.println("Job Title: " + ws.getJobTitle());
 
-	}
-
+}
 }

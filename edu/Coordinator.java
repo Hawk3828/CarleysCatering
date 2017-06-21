@@ -15,12 +15,6 @@ public class Coordinator extends Employee {
 		}
 		this.payRate = payRate;
 	}
-//
-//	@Override
-//	public void setJobTitle(String jobTitle) {
-//		// TODO Auto-generated method stub
-//
-//	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

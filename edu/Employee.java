@@ -50,9 +50,12 @@ public abstract class Employee {
 	/*Original Employee Constructor created first/last name with random method...updated to combine 
 	 * and use index to get a random name from the linkedlist
 	 */
+	 List<String> empList = new LinkedList<>();
+	 
 	public Employee(){
 		int index = (int)(Math.random()*10);
 		setEmployeeIDNumber(index);
+		addempList(empList);
 		setName(empList.get(index));
 //		setFirstName(empFirstName[x]);
 //		setLastName(empLastName[x]);
@@ -98,6 +101,7 @@ public abstract class Employee {
 	public double getPayRate() {
 		return payRate;
 	}
+	
 	// NOTE: only abstract classes can have abstract methods..
 	public abstract void setPayRate(double payRate);
 	
@@ -111,10 +115,8 @@ public abstract class Employee {
 
 	/****************************************************
 	 * Implemented a Checked LinkedList to add employees,
-	 *  Not requires in capstone..added advacne data structure
+	 *  Not requires in CapStone..added advance data structure
 	 */
-	 List<String> empList = new LinkedList<>();
-	 
 		public static List<String> addempList (List<String> empList) {
 			empList.add("Mike Smith");
 			empList.add("Donald Jackson");
@@ -130,8 +132,14 @@ public abstract class Employee {
 		}
 		
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+		
+//		Employee sam = new Employee();
+//		
+//		sam.empList.forEach(p-> {System.out.println(p.indexOf(3));
+//		});
+//
+//	}
 
 }
+	
+} // end of abstract Class Employee

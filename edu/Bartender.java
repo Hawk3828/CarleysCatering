@@ -4,7 +4,7 @@ public class Bartender extends Employee {
 
 	public Bartender() {
 		super();
-		setJobTitle("Bartender ");
+		setJobTitle("Bartender");
 		setPayRate(30.00);
 	}
 

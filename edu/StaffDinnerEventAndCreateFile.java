@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -142,22 +143,23 @@ public class StaffDinnerEventAndCreateFile  {
 				int numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
 					numberOfGuests = verifyGuestCount(numberOfGuests);
 					
-					//Creating Employee List fot each event in a Array.
-					Set<Employee> employeeList = new Hashset();
+					/*
+					 * Uses Advance Data Structure example to create a Set that allows NO DUPS to prevent double employees on duty
+					 */
+					Set<Employee> employeeList = new HashSet<Employee>();
 					employeeList.add(new Coordinator());
 					employeeList.add(new WaitStaff());
 					employeeList.add(new Bartender());
 					
-					 
 					//This while loop was  created for WaitStaff objects in the employeeList Array
 					key = false;
 					
 					while(!key){
 						amountWaitStaff = (int)(numberOfGuests / MIN_WAITSTAFF); 
-						int x = 3;// location after the first three elements in the employeeList Array
-							for(int w = 0; w <= amountWaitStaff ; ++w){// we started at 1 due to the initial WaitStaff
-								employeeList[x] = new WaitStaff();
-								x++;
+//						int x = 3;// location after the first three elements in the employeeList Array
+							for(int x = 0; x <= amountWaitStaff -1 ; ++x){// we started at 1 due to the initial WaitStaff
+								employeeList.add(new WaitStaff());
+//								x++;
 							}
 							key = true;
 							
@@ -167,11 +169,10 @@ public class StaffDinnerEventAndCreateFile  {
 					key = false;
 					while(!key){
 						barStaff = (int)(numberOfGuests / MIN_BARSTAFF);
-						int z = (amountWaitStaff + 1);
-							for(int y = 1 ; y < barStaff; ++y){// y is the amount of time the loop will create object
-								employeeList[z] = new Bartender();// z is the locaton og the objecy in the array
-								++z;
-								
+//						int z = (amountWaitStaff + 1);
+							for(int x = 0; x < barStaff -1; ++x){// y is the amount of time the loop will create object
+								employeeList.add(new Bartender());// z is the locaton og the objecy in the array
+//								++z;
 							}
 							key = true;
 					}// end of inner while loop

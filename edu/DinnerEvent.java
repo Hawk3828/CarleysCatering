@@ -19,7 +19,7 @@ public class DinnerEvent extends EnhancedEvent {
 	private static final String[]  userSideDish = {"Salad","Soup","Veggies","Dips"};
 	private static final String[]  userDessert = {"IceCream","CheeseCake","Brownie","Cookies"};		
 	private  Employee[] employeeList = null ;
-	private  Set<Employee>  setEmployeeList = null ;// modified Employee list for Set 
+	private  Set<Employee> setEmployeeList = null ;// modified Employee list for Set 
 	String completeEmployeeList = "";
 	
 	
@@ -127,13 +127,18 @@ public class DinnerEvent extends EnhancedEvent {
 	public String getEmployeeList() {
 		StringBuilder dinnerStaff = new StringBuilder(completeEmployeeList);  
 		
-		for(int x = 0; x < employeeList.length; ++x){
-			if(employeeList[x] != null){
-			dinnerStaff.append(employeeList.getJobTitle() + ": " 
-								+ em;
-			dinnerStaff.append(System.getProperty("line.separator"));
-			}
-		}
+		setEmployeeList.forEach( p-> dinnerStaff.append( "EmpID: " + p.getEmployeeIDNumber() + " " +
+													     p.getJobTitle() +": " +
+													     p.getName() +
+													     System.getProperty("line.separator")));
+		 
+//		for(int x = 0; x < employeeList.length; ++x){
+//			if(employeeList[x] != null){
+//			dinnerStaff.append(employeeList.getJobTitle() + ": " 
+//								
+//			dinnerStaff.append(System.getProperty("line.separator"));
+//		
+//		}
 		this.completeEmployeeList = dinnerStaff.toString();
 		return completeEmployeeList;
 	}
