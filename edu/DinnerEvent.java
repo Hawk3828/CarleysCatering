@@ -1,6 +1,6 @@
 package edu;
 
-
+import java.util.Set;
 
 public class DinnerEvent extends EnhancedEvent {
 	
@@ -19,6 +19,7 @@ public class DinnerEvent extends EnhancedEvent {
 	private static final String[]  userSideDish = {"Salad","Soup","Veggies","Dips"};
 	private static final String[]  userDessert = {"IceCream","CheeseCake","Brownie","Cookies"};		
 	private  Employee[] employeeList = null ;
+	private  Set<Employee>  setEmployeeList = null ;// modified Employee list for Set 
 	String completeEmployeeList = "";
 	
 	
@@ -60,7 +61,30 @@ public class DinnerEvent extends EnhancedEvent {
 		this.setDessert(dessert);
 		
 	}
-	//Chapter 11...1c...This contructor is for no catering options
+	
+	/*
+	 * This DinnerEvent Constructor was created to support the new Set Data structor
+	 *  For the Employee LnkedList
+	 */
+	public DinnerEvent (final String eventNumber, 
+			            final int numberOfGuest,
+			            final String contactNumber,
+			            final String eventChoice,
+			            final Set<Employee> employeeList,
+			            final int entree,
+			            final int sideOne,
+			            final int sideTwo,
+			            final int dessert){
+		super(eventNumber,numberOfGuest, contactNumber, eventChoice);
+		this.setEmployeeList(employeeList);
+		this.setEntree(entree);
+		this.setSideOne(sideOne);
+		this.setSideTwo(sideTwo);
+		this.setDessert(dessert);
+		
+	}
+	
+	//Chapter 11...1c...This constructor is for no catering options
 	public DinnerEvent(final String eventNumber, 
 						final int numberOfGuest,
 						final String eventChoice){
@@ -69,7 +93,7 @@ public class DinnerEvent extends EnhancedEvent {
 		
 	}
 	
-	//Chapter 11...1c...This contructor is for no catering options
+	//Chapter 11...1c...This constructor is for no catering options
 	public DinnerEvent(final String eventNumber, 
 						final int numberOfGuest,
 						final String contactNumber,
@@ -92,14 +116,21 @@ public class DinnerEvent extends EnhancedEvent {
 		}
 	}
 	
+	/*
+	 * This setter was modified to support the  Set of employeeList
+	 * This setter will guarantee no DUPS in the employee List
+	 */
+	public void setEmployeeList(Set<Employee> employeeList) {
+	this.setEmployeeList = employeeList;
+	}
+	
 	public String getEmployeeList() {
 		StringBuilder dinnerStaff = new StringBuilder(completeEmployeeList);  
 		
 		for(int x = 0; x < employeeList.length; ++x){
 			if(employeeList[x] != null){
-			dinnerStaff.append(employeeList[x].getJobTitle() + ": " 
-								+ employeeList[x].getFirstName()
-								+ " " + employeeList[x].getLastName());
+			dinnerStaff.append(employeeList.getJobTitle() + ": " 
+								+ em;
 			dinnerStaff.append(System.getProperty("line.separator"));
 			}
 		}

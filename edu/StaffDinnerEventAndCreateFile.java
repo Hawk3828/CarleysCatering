@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 
@@ -140,11 +141,12 @@ public class StaffDinnerEventAndCreateFile  {
 				
 				int numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
 					numberOfGuests = verifyGuestCount(numberOfGuests);
+					
 					//Creating Employee List fot each event in a Array.
-					Employee[] employeeList = new Employee[15];
-					employeeList[0] = new Coordinator();
-					employeeList[1] = new WaitStaff();
-					employeeList[2] = new Bartender();
+					Set<Employee> employeeList = new Hashset();
+					employeeList.add(new Coordinator());
+					employeeList.add(new WaitStaff());
+					employeeList.add(new Bartender());
 					
 					 
 					//This while loop was  created for WaitStaff objects in the employeeList Array
