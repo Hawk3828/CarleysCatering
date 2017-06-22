@@ -29,7 +29,7 @@ public class StaffDinnerEventAndCreateFile  {
 	
 	private final static int MIN_WAITSTAFF = 10;
 	private final static int MIN_BARSTAFF = 25;
-	private static final String FILENAME = "StaffedDinnerEvent.txt";
+	private static String FILENAME = "Event_for_Hawkins Jean";
 	public static StringBuilder completeDinnerEvent;
 	public static File aFile;
 	
@@ -91,6 +91,7 @@ public class StaffDinnerEventAndCreateFile  {
 	 *********************************************************************/
 	 
 	public static File createFile(final String aFileName) throws Exception {		
+		
 		// identify the file system..
 		FileSystem fs = FileSystems.getDefault();
 		// gets you the base directory structure...
@@ -125,7 +126,9 @@ public class StaffDinnerEventAndCreateFile  {
 	 	
 		while(!isValid){		 	
 			 	System.out.println("Registering Your Event:");
-		 		String eventNumber = CarlysEventPriceWithMethods.getEventNumber(scanner);
+			 	// I added this variable to create a unique event number...
+		 		String customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
+		 		String eventNumber = null;
 		 		String contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
 		 		String eventOption = CarlysEventPriceWithMethods.getEventOption(scanner);
 		 		
@@ -177,10 +180,11 @@ public class StaffDinnerEventAndCreateFile  {
 							key = true;
 					}// end of inner while loop
 					
-					// Creates the Dinner Event object
-					 dinnerOption.add(new DinnerEvent(eventNumber, 
+					// Creates the Dinner Event object WITH CATERING
+					 dinnerOption.add(new DinnerEvent(customerName, 
 													numberOfGuests, 
 													contactNumber,
+													eventNumber,
 													eventOption,
 													employeeList,
 													entree ,
@@ -192,16 +196,17 @@ public class StaffDinnerEventAndCreateFile  {
 						String NoMenu = "You Chose Not To Have Your Event Catered!";
 						int numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
 						numberOfGuests = verifyGuestCount(numberOfGuests);
-						Employee[] employeeList = new Employee[15];
-						employeeList[0] = new Coordinator();
-						employeeList[1] = new WaitStaff();
-						employeeList[2] = new Bartender();
+						Set<Employee>employeeList = new HashSet<Employee>();
+						employeeList.add(new Coordinator());
+						employeeList.add(new WaitStaff());
+						employeeList.add(new Bartender());
 						
 						
-						// Creates the Dinner Event object with NO-CATERING
-						dinnerOption.add(new DinnerEvent(eventNumber, 
+						// Creates the Dinner Event object WITH NO-CATERING
+						dinnerOption.add(new DinnerEvent(customerName, 
 													  numberOfGuests, 
 													  contactNumber,
+													  eventNumber,
 													  eventOption,
 													  employeeList, 
 													  NoMenu));
@@ -211,7 +216,8 @@ public class StaffDinnerEventAndCreateFile  {
 		 		String userReply = CarlysEventPriceWithMethods.userReplyToEvent(scanner);
 		 		
 	
-				if (userReply.equalsIgnoreCase("N")){
+
+		 		if (userReply.equalsIgnoreCase("N")){
 					
 					for(DinnerEvent displayEvent: dinnerOption){
 							System.out.println("***************** EVENT DETAILS FOR: " + displayEvent.getEventNumber() + "  *******************");
@@ -299,11 +305,10 @@ public class StaffDinnerEventAndCreateFile  {
 		public static void main(String[] args) throws AlphaNumericException,Exception {
 			
 			createConnection();
-			
-			aFile = createFile(FILENAME);
 			Scanner scanner = new Scanner(System.in);
 		    demoChapter13(scanner);
 		    scanner.close();
+		    aFile = createFile(FILENAME);
 			writeListToFile(completeDinnerEvent,aFile);
 			
 		}	 	

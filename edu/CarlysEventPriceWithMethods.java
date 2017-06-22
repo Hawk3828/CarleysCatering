@@ -15,8 +15,80 @@ public class CarlysEventPriceWithMethods {
 	private static final double PRICE_PER_PERSON = 35.00;
 	private static final  int MAX = 5;
 	
+	/*
+	 * I added this method to create a Customer Name from user input
+	 */
+	public static String getCustomerName(final Scanner scanner){
+		boolean loopExit = false;
+		String customerName = null;
+	while(!loopExit){
+		
+		System.out.print("Please Enter First Name ");
+		String firstName = scanner.next();
+		System.out.print("Please Enter Last Name ");
+		String lastName = scanner.next();
+		
+		StringBuilder customername = new StringBuilder();
+		
+		customername.append(firstName);
+		customername.append(" ");
+		customername.append(lastName);
+		
+		customerName = customername.toString();
+		
+		
+		 if(customerName.isEmpty()){
+			 System.out.println( "Please re-enter your name");
+		 }else{
+			 loopExit = true;
+		 }
+		
+		 }
+	 return customerName;	 
+		
+	}
+	
+	// For Chapter 7 Capstone...
+	//No Error Handling due to StringBuffer modification in setContactNumber
+	public static String getContactNumber(final Scanner scanner){
+		boolean loopExit = false;
+		String contactNumber = null;
+		
+		while(!loopExit){
+			System.out.print("Please Enter your Contact Number: ");
+			contactNumber = scanner.next();
+			loopExit = true;
+		}
+		loopExit = true;
+		return contactNumber;
+	}
+	
+
+//	// For Chapter 3 Capstone...
+//	//Chapter 12 ..1...Error Handling...
+//	// Example of Creating Custom Exception
+//	public  static String generateEventNumber(final Scanner scanner) throws AlphaNumericException {
+//		boolean loopExit = false;
+//		String eventNumber = null;
+//	while(!loopExit){
+//		try{
+//		System.out.print("Please enter an Alpha Numeric Event Number (for ex: M122): ");
+//		 eventNumber = scanner.next();
+//		 if(Character.isDigit(eventNumber.charAt(0))) throw  new AlphaNumericException();
+//		 loopExit = true;
+//		}
+//		catch(AlphaNumericException e){
+//			System.out.println("Please Enter Proper Event Number");
+//		}
+//		
+//	}
+//		loopExit = true;
+//		return eventNumber;
+//	}
+	
+	
 	// Chapter 12..1...Error Handling
-	//Exmaple of UN-Checked Exception
+	//Example of UN-Checked Exception
 		public static int getGuestCount(final Scanner scanner) {
 			int numberOfGuests = 0;
 			try{
@@ -30,41 +102,8 @@ public class CarlysEventPriceWithMethods {
 			return numberOfGuests;
 		}
 		
-		// For Chapter 3 Capstone...
-		//Chapter 12 ..1...Error Handling...
-		// Example of Creating Custom Exception
-		public  static String getEventNumber(final Scanner scanner) throws AlphaNumericException {
-			boolean loopExit = false;
-			String eventNumber = null;
-		while(!loopExit){
-			try{
-			System.out.print("Please enter an Alpha Numeric Event Number (for ex: M122): ");
-			 eventNumber = scanner.next();
-			 if(Character.isDigit(eventNumber.charAt(0))) throw  new AlphaNumericException();
-			 loopExit = true;
-			}
-			catch(AlphaNumericException e){
-				System.out.println("Please Enter Proper Event Number");
-			}
-		}
-			loopExit = true;
-			return eventNumber;
-		}
-	
-	// For Chapter 7 Capstone...
-		//No Error Handling due to StringBuffer modification in setContactNumber
-		public static String getContactNumber(final Scanner scanner){
-			boolean loopExit = false;
-			String contactNumber = null;
-			
-			while(!loopExit){
-				System.out.print("Please Enter your Contact Number: ");
-				contactNumber = scanner.next();
-				loopExit = true;
-			}
-			loopExit = true;
-			return contactNumber;
-		}
+		
+		
 	
 		// For Chapter 8 Capstone...created
 		//Chapter 12..1..Example of catching two Exceptions
@@ -173,37 +212,37 @@ public class CarlysEventPriceWithMethods {
 	
 	/**
 	 * OVERLOADED Display Methods************************************************************
-	 */
-		public static void displayCompanyMottoWithBorder() {
-			 // Finally display the motto....
-		    System.out.println("******************************************************");
-			System.out.println("**** Carly's makes the food that makes it a party ****");
-			System.out.println("******************************************************");
-		}
-	
-		public static void displayEventDetails(final int numberOfGuests) {		
-			// compute the total price = number of guests * price per guest.
-			double totalPrice = numberOfGuests * PRICE_PER_PERSON;
-			System.out.print("Price Per Guest: " + PRICE_PER_PERSON);
-			System.out.print("# Number of Guests: " + numberOfGuests);
-			System.out.print("Total Price: " + totalPrice);
-		
-			// Display whether job is classified as a large event or not..
-		    boolean isLargeEvent = (numberOfGuests > 50);
-		    System.out.print("Is Large Event: " + isLargeEvent);		
-		}
-		
-		// NOTE: We created this method to support the ASK in the Chapter 5 capstone..
-		public static void displayEventDetails(final EnhancedEvent event) {	
-			System.out.println("Thank You for letting us Plan your: " + event.getEventOption() + " Event" );
-			System.out.println("Your Contact Number is: " + event.getContactNumber());
-			System.out.println("Event Number: " + event.getEventNumber());
-			System.out.println("Price Per Guest: " + event.getPricePerGuest());
-			System.out.println("# Number of Guests: " + event.getNumberOfGuest());
-			System.out.println("Total Price: " + event.getTotalPrice());
-			System.out.println("Is Large Event: " + event.isLargeEvent());
-		}
-		
+//	 */
+//		public static void displayCompanyMottoWithBorder() {
+//			 // Finally display the motto....
+//		    System.out.println("******************************************************");
+//			System.out.println("**** Carly's makes the food that makes it a party ****");
+//			System.out.println("******************************************************");
+//		}
+//	******************************************************************************************
+//		public static void displayEventDetails(final int numberOfGuests) {		
+//			// compute the total price = number of guests * price per guest.
+//			double totalPrice = numberOfGuests * PRICE_PER_PERSON;
+//			System.out.print("Price Per Guest: " + PRICE_PER_PERSON);
+//			System.out.print("# Number of Guests: " + numberOfGuests);
+//			System.out.print("Total Price: " + totalPrice);
+//		
+//			// Display whether job is classified as a large event or not..
+//		    boolean isLargeEvent = (numberOfGuests > 50);
+//		    System.out.print("Is Large Event: " + isLargeEvent);		
+//		}
+//		****************************************************************************************
+//		// NOTE: We created this method to support the ASK in the Chapter 5 capstone..
+//		public static void displayEventDetails(final EnhancedEvent event) {	
+//			System.out.println("Thank You for letting us Plan your: " + event.getEventOption() + " Event" );
+//			System.out.println("Your Contact Number is: " + event.getContactNumber());
+//			System.out.println("Event Number: " + event.getEventNumber());
+//			System.out.println("Price Per Guest: " + event.getPricePerGuest());
+//			System.out.println("# Number of Guests: " + event.getNumberOfGuest());
+//			System.out.println("Total Price: " + event.getTotalPrice());
+//			System.out.println("Is Large Event: " + event.isLargeEvent());
+//		}
+//		
 		// NOTE: Chapter 11 ASK...passes a Dinner Event
 //		public static void displayDinnerEventDetails(final DinnerEvent event) {	
 //			System.out.println("Thank You for letting us Plan your: " + event.getEventOption()  + " Event" );
@@ -218,6 +257,7 @@ public class CarlysEventPriceWithMethods {
 //		
 		// NOTE: Chapter 11 ASK...passes a Dinner Event with NO Catering Option
 		public static void displayDinnerEventDetails(final DinnerEvent event, final Boolean noMenu) {	
+			System.out.println("Thank You " + event.getCustomerName() + " for letting us Plan your: " + event.getEventOption()  + " Event" );
 			System.out.println("Thank You for letting us Plan your: " + event.getEventOption()  + " Event" );
 			System.out.println("Event Number: " + event.getEventNumber());
 			System.out.println("# Number of Guests: " + event.getNumberOfGuest());
@@ -231,7 +271,7 @@ public class CarlysEventPriceWithMethods {
 		}
 		// NOTE: Chapter 11 ASK...passes a Dinner Event
 		public static void displayStaffDinnerEventDetails(final DinnerEvent event) {	
-			System.out.println("Thank You for letting us Plan your: " + event.getEventOption()  + " Event" );
+			System.out.println("Thank You " + event.getCustomerName() + " for letting us Plan your: " + event.getEventOption()  + " Event" );
 			System.out.println("Event Number: " + event.getEventNumber());
 			System.out.println("# Number of Guests: " + event.getNumberOfGuest());
 			System.out.println("Contact Number: " + event.getContactNumber());
@@ -255,19 +295,19 @@ public class CarlysEventPriceWithMethods {
 										System.getProperty("line.separator"));
 					completeEvent.append("The Total Pric: $" + event.getTotalPrice()+
 							System.getProperty("line.separator"));
-//					completeEvent.append("Contact Number: " + event.getContactNumber() +
-//										System.getProperty("line.separator"));
-//					completeEvent.append(System.getProperty("line.separator"));
-//							completeEvent.append("Your Dinner Menu" + 
-//										System.getProperty("line.separator") + "***************" +
-//										System.getProperty("line.separator"));
-//					event.setMenu();
-//					completeEvent.append(event.getMenu() + 
-//										System.getProperty("line.separator"));
-//					completeEvent.append(System.getProperty("line.separator"));
-//					completeEvent.append("Your Staff " + System.getProperty("line.separator") + 
-//										"**********" + System.getProperty("line.separator") 
-//										+ event.getEmployeeList());
+					completeEvent.append("Contact Number: " + event.getContactNumber() +
+										System.getProperty("line.separator"));
+					completeEvent.append(System.getProperty("line.separator"));
+							completeEvent.append("Your Dinner Menu" + 
+										System.getProperty("line.separator") + "***************" +
+										System.getProperty("line.separator"));
+					event.setMenu();
+					completeEvent.append(event.getMenu() + 
+										System.getProperty("line.separator"));
+					completeEvent.append(System.getProperty("line.separator"));
+					completeEvent.append("Your Staff " + System.getProperty("line.separator") + 
+										"**********" + System.getProperty("line.separator") 
+										+ event.getEmployeeList());
 					return completeEvent;
 				}
 		//**************************************************************************

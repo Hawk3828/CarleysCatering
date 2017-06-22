@@ -27,94 +27,103 @@ public class DinnerEvent extends EnhancedEvent {
 	 * CHAPTER CONSTRCUTORS
 	 */
 
-	
-	// Chapter 10 ...1a
-	public DinnerEvent (final String eventNumber, 
-			            final int numberOfGuest,
-			            final String eventChoice,
-			            final int entree,
-			            final int sideOne,
-			            final int sideTwo,
-			            final int dessert){
-		super(eventNumber,numberOfGuest,eventChoice);
-		this.setEntree(entree);
-		this.setSideOne(sideOne);
-		this.setSideTwo(sideTwo);
-		this.setDessert(dessert);
-	}
-	
-	// Chapter 11 ...1d
-	public DinnerEvent (final String eventNumber, 
-			            final int numberOfGuest,
-			            final String contactNumber,
-			            final String eventChoice,
-			            final Employee[] employeeList,
-			            final int entree,
-			            final int sideOne,
-			            final int sideTwo,
-			            final int dessert){
-		super(eventNumber,numberOfGuest, contactNumber, eventChoice);
-		this.setEmployeeList(employeeList);
-		this.setEntree(entree);
-		this.setSideOne(sideOne);
-		this.setSideTwo(sideTwo);
-		this.setDessert(dessert);
-		
-	}
+//	
+//	// Chapter 10 ...1a
+//	public DinnerEvent (final String eventNumber, 
+//			            final int numberOfGuest,
+//			            final String eventChoice,
+//			            final int entree,
+//			            final int sideOne,
+//			            final int sideTwo,
+//			            final int dessert){
+//		super(eventNumber,numberOfGuest,eventChoice);
+//		this.setEntree(entree);
+//		this.setSideOne(sideOne);
+//		this.setSideTwo(sideTwo);
+//		this.setDessert(dessert);
+//	}
+//	
+//	/*
+//	 * This DinnerEvent Constructor was created to with array of Employees objects..
+//	 *  For the Employee LnkedList
+//	 *   Chapter 11 ...1d
+//	 */
+//	public DinnerEvent (final String eventNumber, 
+//			            final int numberOfGuest,
+//			            final String contactNumber,
+//			            final String eventChoice,
+//			            final Employee[] employeeList,
+//			            final int entree,
+//			            final int sideOne,
+//			            final int sideTwo,
+//			            final int dessert){
+//		super(eventNumber,numberOfGuest, contactNumber, eventChoice);
+//		this.setEmployeeList(employeeList);
+//		this.setEntree(entree);
+//		this.setSideOne(sideOne);
+//		this.setSideTwo(sideTwo);
+//		this.setDessert(dessert);
+//		
+//	}
 	
 	/*
-	 * This DinnerEvent Constructor was created to support the new Set Data structor
+	 * This DinnerEvent Constructor was created to support the new Set Data Structure
 	 *  For the Employee LnkedList
 	 */
-	public DinnerEvent (final String eventNumber, 
+	public DinnerEvent (final String customerName, 
 			            final int numberOfGuest,
 			            final String contactNumber,
+			            final String eventNumber,
 			            final String eventChoice,
 			            final Set<Employee> employeeList,
 			            final int entree,
 			            final int sideOne,
 			            final int sideTwo,
 			            final int dessert){
-		super(eventNumber,numberOfGuest, contactNumber, eventChoice);
+		super(customerName,numberOfGuest, contactNumber, eventNumber,eventChoice);
 		this.setEmployeeList(employeeList);
 		this.setEntree(entree);
 		this.setSideOne(sideOne);
 		this.setSideTwo(sideTwo);
 		this.setDessert(dessert);
 		
-	}
-	
-	//Chapter 11...1c...This constructor is for no catering options
-	public DinnerEvent(final String eventNumber, 
-						final int numberOfGuest,
-						final String eventChoice){
-		super(eventNumber,numberOfGuest,eventChoice);
-		this.setNoMenu(NoMenu);
 		
 	}
 	
+//	//Chapter 11...1c...This constructor is for no catering options
+//	public DinnerEvent(final String eventNumber, 
+//						final int numberOfGuest,
+//						final String eventChoice){
+//		super(eventNumber,numberOfGuest,eventChoice);
+//		this.setNoMenu(NoMenu);
+//		
+//	}
+//	
 	//Chapter 11...1c...This constructor is for no catering options
-	public DinnerEvent(final String eventNumber, 
+	public DinnerEvent(final String customerName, 
 						final int numberOfGuest,
 						final String contactNumber,
+						final String eventNumber,
 						final String eventChoice,
-						final Employee[] employeeList,
+						final Set<Employee> employeeList,
 						final String NoMenu){
-		super(eventNumber,numberOfGuest, contactNumber, eventChoice);
+		super(customerName,numberOfGuest, contactNumber, eventNumber,eventChoice);
 		this.setEmployeeList(employeeList);
 		this.setNoMenu(NoMenu);
 		
 	}
 	
+	//********Getter and Setters***************
 	
-	//Chapter 11 ...1c 
-	public void setEmployeeList(Employee[] employeeList) {
-		if(employeeList.length == 15) {
-			this.employeeList = employeeList;
-		}else {
-			this.employeeList = new Employee[15];
-		}
-	}
+	
+//	//Chapter 11 ...1c 
+//	public void setEmployeeList(Employee[] employeeList) {
+//		if(employeeList.length == 15) {
+//			this.employeeList = employeeList;
+//		}else {
+//			this.employeeList = new Employee[15];
+//		}
+//	}
 	
 	/*
 	 * This setter was modified to support the  Set of employeeList
@@ -142,8 +151,10 @@ public class DinnerEvent extends EnhancedEvent {
 		this.completeEmployeeList = dinnerStaff.toString();
 		return completeEmployeeList;
 	}
+
 	
-	//********Getter and Setters***************
+	
+	
 	public int getSideOne() {
 		return sideOne;
 	}

@@ -15,13 +15,16 @@ public class EnhancedEvent {
 	 * Chapter 5...(b) bullet point 1 
 	 * eventNumber is set as a string because Carlys plans to assign seat "M312"
 	 */
+	// added variable to generate unique customerName
+	private String customerName;
+	private String contactNumber;
 	private String eventNumber;
 	private int guestCount;
 	// created in Chapter 5...
 	private double pricePerGuest;
 	private double totalPrice;
 	// added in chapter7..
-	private String contactNumber;
+	
 	
 	//Chapter 8 (1)...bullet point 1
 	private int eventType;
@@ -39,6 +42,13 @@ public class EnhancedEvent {
 	 * @param eventNumber
 	 */
 	// ***********************SETTER AND GETTERS***********************
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 	
 	public static double getMinPricePerGuest() {
 		return MIN_PRICE_PER_GUEST;
@@ -73,7 +83,6 @@ public class EnhancedEvent {
 		}
 		this.contactNumber = digitizedUserContact.toString();
 	}
-	
 
 	public StringBuilder  getContactNumber() {
 		StringBuilder formattedContactNumber = new StringBuilder(this.contactNumber);
@@ -85,14 +94,23 @@ public class EnhancedEvent {
 	}
 	
 	// Chapter 7..(1)..bullet point 1
-	public void setEventNumber(final String eventNumber) {
-		if(eventNumber.length() == 4 && Character.isAlphabetic(eventNumber.charAt(0))){
-			// NOTE: make sure that you convert to  upper case...
-			this.eventNumber = eventNumber.toUpperCase();	
-		}else{
-			this.eventNumber = DEFAULT_EVENT_NUMBER;
-			// System.out.println("You Entered a incorrect Event Number format, a default number has been given to you: A000");
-		}
+	public void setEventNumber() {
+		StringBuilder createEventNumber = new StringBuilder();
+		createEventNumber.insert(0, this.customerName.charAt(0));
+		createEventNumber.insert(1, this.contactNumber.subSequence(6, 10));
+		
+		System.out.println(createEventNumber.toString());
+		
+	 this.eventNumber = createEventNumber.toString().toUpperCase();
+		
+		
+//		if(eventNumber.length() == 4 && Character.isAlphabetic(eventNumber.charAt(0))){
+//			// NOTE: make sure that you convert to  upper case...
+//			this.eventNumber = eventNumber.toUpperCase();	
+//		}else{
+//			this.eventNumber = DEFAULT_EVENT_NUMBER;
+//			// System.out.println("You Entered a incorrect Event Number format, a default number has been given to you: A000");
+//		}
 	}
 	
 	public String getEventNumber() {
@@ -176,17 +194,19 @@ public class EnhancedEvent {
 	 * Chapter 4 ...(1a) bullet one and two...
 	 */
 	public EnhancedEvent(){
-		this.setEventNumber("A000");
+//		this.setEventNumber("A000");
 		this.setGuest(0);
 	}
 	// custom constructor..Chapter 7..adds contact number
-	public EnhancedEvent(final String eventNumber, 
+	public EnhancedEvent(final String customerName, 
 						 final int numberOfGuest, 
-						 final String contactNumber, 
+						 final String contactNumber,
+						 final String eventNumber,
 						 final String eventOption){
-		setEventNumber(eventNumber);
+		setCustomerName(customerName);
 		setGuest(numberOfGuest);
 		setContactNumber(contactNumber);
+		setEventNumber();
 		setEventOption(eventOption);
 	}
 	
@@ -194,7 +214,7 @@ public class EnhancedEvent {
 	public EnhancedEvent(final String eventNumber, 
 						 final int numberOfGuest,
 						 final String eventOption){
-		setEventNumber(eventNumber);
+		setEventNumber();
 		setGuest(numberOfGuest);
 		setEventOption(eventOption);
 	}
