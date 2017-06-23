@@ -305,9 +305,11 @@ public class CarlysEventPriceWithMethods {
 					completeEvent.append(event.getMenu() + 
 										System.getProperty("line.separator"));
 					completeEvent.append(System.getProperty("line.separator"));
+					
+					// I used the Instance variable here because the getEmploeList has a lambda in it that traverses the list and creates doubles..
 					completeEvent.append("Your Staff " + System.getProperty("line.separator") + 
 										"**********" + System.getProperty("line.separator") 
-										+ event.getEmployeeList());
+										+ event.completeEmployeeList);
 					return completeEvent;
 				}
 		//**************************************************************************

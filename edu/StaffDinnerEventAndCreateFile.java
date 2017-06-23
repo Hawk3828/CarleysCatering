@@ -29,9 +29,10 @@ public class StaffDinnerEventAndCreateFile  {
 	
 	private final static int MIN_WAITSTAFF = 10;
 	private final static int MIN_BARSTAFF = 25;
-	private static String FILENAME = "Event_for_Hawkins Jean";
-	public static StringBuilder completeDinnerEvent;
+	private static String FILENAME = "Event_for_Hawkins Jean.txt";
+	static String FinalDinnerEvent = "";
 	public static File aFile;
+	
 	
 	
 /**********************************************************************
@@ -123,13 +124,15 @@ public class StaffDinnerEventAndCreateFile  {
 	 	int barStaff = 0;
 	 	boolean key ;
 	 	
+	 	System.out.println("Please Register Your Event:");
+	 	System.out.println();
+		// I added this variable to create a unique event number...
+	 	String customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
+ 		String eventNumber = null;
+ 		String contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
 	 	
-		while(!isValid){		 	
-			 	System.out.println("Registering Your Event:");
-			 	// I added this variable to create a unique event number...
-		 		String customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
-		 		String eventNumber = null;
-		 		String contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
+ 		while(!isValid){
+		
 		 		String eventOption = CarlysEventPriceWithMethods.getEventOption(scanner);
 		 		
 		 		System.out.println("Would You Like This Event Catered \nY: YES \nN: NO");
@@ -219,13 +222,25 @@ public class StaffDinnerEventAndCreateFile  {
 
 		 		if (userReply.equalsIgnoreCase("N")){
 					
+		 			
 					for(DinnerEvent displayEvent: dinnerOption){
-							System.out.println("***************** EVENT DETAILS FOR: " + displayEvent.getEventNumber() + "  *******************");
+						StringBuilder modifiedEventNumber = new StringBuilder("") ;
+						StringBuilder completeDinnerEvent = new StringBuilder(FinalDinnerEvent) ;
+						
+						
+						modifiedEventNumber.append(displayEvent.getEventNumber());
+						
+						if(modifiedEventNumber.toString() != displayEvent.getEventNumber().toString()){
+							modifiedEventNumber.append("-");
+							modifiedEventNumber.append(displayEvent.getEventNumber().substring(0, 4));
+						}
+						
+							System.out.println("***************** EVENT DETAILS FOR: " + modifiedEventNumber + "  *******************");
 							// Display Event details...
 							if(displayEvent.getNoMenu() != null){
 								boolean noMenu = true;
 								CarlysEventPriceWithMethods.displayDinnerEventDetails(displayEvent,noMenu );
-								completeDinnerEvent = CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent);
+								completeDinnerEvent.append(CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent));
 								System.out.println();	
 							}else{
 					             CarlysEventPriceWithMethods.displayStaffDinnerEventDetails(displayEvent);
@@ -281,14 +296,14 @@ public class StaffDinnerEventAndCreateFile  {
 	 * Writes the DinnerEvent to a 
 	 *********************************************************************/
 			
-			public static void writeListToFile(StringBuilder anEvent, File aFile) throws Exception {
+			public static void writeListToFile(String FinalDinnerEvent, File aFile) throws Exception {
 				// connects a PrintWriter instance to a File to enable writing to the file...
 				PrintWriter aWriter = new PrintWriter(aFile);
 				// iterate thru  the array list and write each node of the array list to the file...
 				//for (StringBuilder aData : anEvent) 
 				// for (Survey survey : aList) {
 				// Use the StringBuilder to format the members of the survey class and then send it to the writer
-				aWriter.println(anEvent);
+				aWriter.println(FinalDinnerEvent);
 				
 				// close the writer and therefore the file..
 				aWriter.close();
@@ -309,7 +324,7 @@ public class StaffDinnerEventAndCreateFile  {
 		    demoChapter13(scanner);
 		    scanner.close();
 		    aFile = createFile(FILENAME);
-			writeListToFile(completeDinnerEvent,aFile);
+			writeListToFile(FinalDinnerEvent,aFile);
 			
 		}	 	
 		
