@@ -208,6 +208,8 @@ public class CarlysEventPriceWithMethods {
 			String userReply = scanner.next();
 			return userReply;
 		}
+		
+	
 	
 	
 	/**
@@ -257,9 +259,8 @@ public class CarlysEventPriceWithMethods {
 //		
 		// NOTE: Chapter 11 ASK...passes a Dinner Event with NO Catering Option
 		public static void displayDinnerEventDetails(final DinnerEvent event, final Boolean noMenu) {	
-			System.out.println("Thank You " + event.getCustomerName() + " for letting us Plan your: " + event.getEventOption()  + " Event" );
-			System.out.println("Thank You for letting us Plan your: " + event.getEventOption()  + " Event" );
-			System.out.println("Event Number: " + event.getEventNumber());
+			System.out.println("Thank You  for letting us Plan your: " + event.getEventOption()  + " Event" );
+			System.out.println("Event Number: " + StaffDinnerEventAndCreateFile.modifiedEvent);
 			System.out.println("# Number of Guests: " + event.getNumberOfGuest());
 			System.out.println("Contact Number:  " + event.getContactNumber());
 			System.out.println();
@@ -271,8 +272,8 @@ public class CarlysEventPriceWithMethods {
 		}
 		// NOTE: Chapter 11 ASK...passes a Dinner Event
 		public static void displayStaffDinnerEventDetails(final DinnerEvent event) {	
-			System.out.println("Thank You " + event.getCustomerName() + " for letting us Plan your: " + event.getEventOption()  + " Event" );
-			System.out.println("Event Number: " + event.getEventNumber());
+			System.out.println("Thank You  for letting us Plan your: " + event.getEventOption()  + " Event" );
+			System.out.println("Event Number: " + StaffDinnerEventAndCreateFile.modifiedEvent);
 			System.out.println("# Number of Guests: " + event.getNumberOfGuest());
 			System.out.println("Contact Number: " + event.getContactNumber());
 			System.out.println();

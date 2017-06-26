@@ -12,9 +12,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 
@@ -30,8 +32,11 @@ public class StaffDinnerEventAndCreateFile  {
 	private final static int MIN_WAITSTAFF = 10;
 	private final static int MIN_BARSTAFF = 25;
 	private static String FILENAME = "Event_for_Hawkins Jean.txt";
-	static String FinalDinnerEvent = "";
+	public static String FinalDinnerEvent = "";
+	public static String modifiedEvent = "";
 	public static File aFile;
+	
+
 	
 	
 	
@@ -116,9 +121,11 @@ public class StaffDinnerEventAndCreateFile  {
 	 * Create DinnerEvent with Dinner Options and Employee List
 	 *********************************************************************/
 	
-	public static void demoChapter13(final Scanner scanner) throws AlphaNumericException{
+	public static void createDinnerEvent(final Scanner scanner) throws AlphaNumericException{
 	 	List<DinnerEvent> dinnerOption = new ArrayList<DinnerEvent> ();
-	 	
+		StringBuilder completeDinnerEvent = new StringBuilder(FinalDinnerEvent) ;
+		StringBuilder modifiedEventNumber = new StringBuilder("") ;
+		
 	 	Boolean isValid = false;	
 	 	int amountWaitStaff = 0 ;
 	 	int barStaff = 0;
@@ -149,25 +156,57 @@ public class StaffDinnerEventAndCreateFile  {
 				int numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
 					numberOfGuests = verifyGuestCount(numberOfGuests);
 					
-					/*
+					/************************************************************************************************************
 					 * Uses Advance Data Structure example to create a Set that allows NO DUPS to prevent double employees on duty
-					 */
+					 **************************************************************************************************************/
 					Set<Employee> employeeList = new HashSet<Employee>();
 					employeeList.add(new Coordinator());
 					employeeList.add(new WaitStaff());
 					employeeList.add(new Bartender());
 					
+		
+					
 					//This while loop was  created for WaitStaff objects in the employeeList Array
 					key = false;
 					
 					while(!key){
+						
 						amountWaitStaff = (int)(numberOfGuests / MIN_WAITSTAFF); 
+						
 //						int x = 3;// location after the first three elements in the employeeList Array
 							for(int x = 0; x <= amountWaitStaff -1 ; ++x){// we started at 1 due to the initial WaitStaff
+								
+							String verifiyName = new WaitStaff().getName();
+//							
+//							employeeList.forEach ( p-> { if (p.getName() != verifiyName){ employeeList.add(new WaitStaff());
+//							}
+							
+							Iterator<Employee> it = employeeList.iterator();
+							
+							while(it.hasNext()){
+			
+								if (employeeList != null ){
 								employeeList.add(new WaitStaff());
-//								x++;
 							}
+								
+							}
+				
+////							for(Employee p: employeeList){
+////								
+////								if (p.getName()!=verifiyName){
+////									employeeList.add(new WaitStaff());
+////								}
+////							}
+////							
+//							employeeList.forEach ( p-> { if (p.getName() != verifiyName){
+//								
+//								employeeList.add(new WaitStaff());
+//							}
+//							
+//						});
+//							
 							key = true;
+					}
 							
 						}// end of while loop 
 					
@@ -182,6 +221,9 @@ public class StaffDinnerEventAndCreateFile  {
 							}
 							key = true;
 					}// end of inner while loop
+					
+					
+					
 					
 					// Creates the Dinner Event object WITH CATERING
 					 dinnerOption.add(new DinnerEvent(customerName, 
@@ -213,43 +255,36 @@ public class StaffDinnerEventAndCreateFile  {
 													  eventOption,
 													  employeeList, 
 													  NoMenu));
-										}
-				
-			 	System.out.println("*********************************************************");
-		 		String userReply = CarlysEventPriceWithMethods.userReplyToEvent(scanner);
-		 		
-	
+			}
 
-		 		if (userReply.equalsIgnoreCase("N")){
+			System.out.println("*********************************************************");
+			String userReply = CarlysEventPriceWithMethods.userReplyToEvent(scanner);
+
+
+
+			if (userReply.equalsIgnoreCase("N")){
+
+				//Advanced For Loop to traverse through objects and run display method on elements
+				for(DinnerEvent displayEvent: dinnerOption){
 					
-		 			
-					for(DinnerEvent displayEvent: dinnerOption){
-						StringBuilder modifiedEventNumber = new StringBuilder("") ;
-						StringBuilder completeDinnerEvent = new StringBuilder(FinalDinnerEvent) ;
-						
-						
-						modifiedEventNumber.append(displayEvent.getEventNumber());
-						
-						if(modifiedEventNumber.toString() != displayEvent.getEventNumber().toString()){
-							modifiedEventNumber.append("-");
-							modifiedEventNumber.append(displayEvent.getEventNumber().substring(0, 4));
-						}
-						
-							System.out.println("***************** EVENT DETAILS FOR: " + modifiedEventNumber + "  *******************");
-							// Display Event details...
-							if(displayEvent.getNoMenu() != null){
-								boolean noMenu = true;
-								CarlysEventPriceWithMethods.displayDinnerEventDetails(displayEvent,noMenu );
-								completeDinnerEvent.append(CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent));
-								System.out.println();	
-							}else{
-					             CarlysEventPriceWithMethods.displayStaffDinnerEventDetails(displayEvent);
-					            completeDinnerEvent = CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent);
-								System.out.println();
-							}
+					// Implemented new  Sting join method  available in Java 8
+					modifiedEvent = String.join("-", displayEvent.getEventNumber().toString(), displayEvent.getEventOption().substring(0, 4));
+					
+				System.out.println("***************** EVENT DETAILS FOR: " + displayEvent.getCustomerName()  + " *******************");
+					// Display Event details...
+					if(displayEvent.getNoMenu() != null){
+						boolean noMenu = true;
+						CarlysEventPriceWithMethods.displayDinnerEventDetails(displayEvent,noMenu );
+						completeDinnerEvent.append(CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent));
+						System.out.println();	
+					}else{
+						CarlysEventPriceWithMethods.displayStaffDinnerEventDetails(displayEvent);
+						completeDinnerEvent = CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent);
+						System.out.println();
 					}
-					 	isValid = true;
 				}
+				isValid = true;
+			}
 		}// end of While Loop
 		
 		
@@ -321,7 +356,7 @@ public class StaffDinnerEventAndCreateFile  {
 			
 			createConnection();
 			Scanner scanner = new Scanner(System.in);
-		    demoChapter13(scanner);
+			createDinnerEvent(scanner);
 		    scanner.close();
 		    aFile = createFile(FILENAME);
 			writeListToFile(FinalDinnerEvent,aFile);

@@ -99,7 +99,7 @@ public class EnhancedEvent {
 		createEventNumber.insert(0, this.customerName.charAt(0));
 		createEventNumber.insert(1, this.contactNumber.subSequence(6, 10));
 		
-		System.out.println(createEventNumber.toString());
+		//System.out.println(createEventNumber.toString());
 		
 	 this.eventNumber = createEventNumber.toString().toUpperCase();
 		
