@@ -269,6 +269,7 @@ public class CarlysEventPriceWithMethods {
 			System.out.println(event.getNoMenu());
 			System.out.println("Your Staff "  );
 			System.out.println(event.getEmployeeList());
+		
 		}
 		// NOTE: Chapter 11 ASK...passes a Dinner Event
 		public static void displayStaffDinnerEventDetails(final DinnerEvent event) {	
@@ -283,36 +284,38 @@ public class CarlysEventPriceWithMethods {
 			System.out.println();
 			System.out.println("Your Staff "  );
 			System.out.println(event.getEmployeeList());
-			
+		
 		}
 		// NOTE: Chapter 13 ASK...write  Dinner Event
-				public static StringBuilder createStaffDinnerEventDetails(final DinnerEvent event) {
-					StringBuilder completeEvent = new StringBuilder();
-					completeEvent.append("Thank You for letting us Plan your: " + event.getEventOption()  + " Event" 
-										+ System.getProperty("line.separator"));
-					completeEvent.append("Event Number: " + event.getEventNumber() + 
-										System.getProperty("line.separator"));
-					completeEvent.append("Number of Guests: " + event.getNumberOfGuest()+
-										System.getProperty("line.separator"));
-					completeEvent.append("The Total Pric: $" + event.getTotalPrice()+
-							System.getProperty("line.separator"));
-					completeEvent.append("Contact Number: " + event.getContactNumber() +
-										System.getProperty("line.separator"));
-					completeEvent.append(System.getProperty("line.separator"));
-							completeEvent.append("Your Dinner Menu" + 
-										System.getProperty("line.separator") + "***************" +
-										System.getProperty("line.separator"));
-					event.setMenu();
-					completeEvent.append(event.getMenu() + 
-										System.getProperty("line.separator"));
-					completeEvent.append(System.getProperty("line.separator"));
-					
-					// I used the Instance variable here because the getEmploeList has a lambda in it that traverses the list and creates doubles..
-					completeEvent.append("Your Staff " + System.getProperty("line.separator") + 
-										"**********" + System.getProperty("line.separator") 
-										+ event.completeEmployeeList);
-					return completeEvent;
-				}
+		public static StringBuilder createStaffDinnerEventDetails(final DinnerEvent event) {
+			StringBuilder completeEvent = new StringBuilder();
+			completeEvent.append("Thank You for letting us Plan your: " + event.getEventOption()  + " Event" 
+					+ System.getProperty("line.separator"));
+			completeEvent.append("Event Number: " + event.getEventNumber() + 
+					System.getProperty("line.separator"));
+			completeEvent.append("Number of Guests: " + event.getNumberOfGuest()+
+					System.getProperty("line.separator"));
+			completeEvent.append("The Total Pric: $" + event.getTotalPrice()+
+					System.getProperty("line.separator"));
+			completeEvent.append("Contact Number: " + event.getContactNumber() +
+					System.getProperty("line.separator"));
+			completeEvent.append(System.getProperty("line.separator"));
+			completeEvent.append("Your Dinner Menu" + 
+					System.getProperty("line.separator") + "***************" +
+					System.getProperty("line.separator"));
+			event.setMenu();
+			completeEvent.append(event.getMenu() + 
+					System.getProperty("line.separator"));
+			completeEvent.append(System.getProperty("line.separator"));
+
+			// I used the Instance variable here because the getEmploeList has a lambda in it that traverses the list and creates doubles..
+			completeEvent.append("Your Staff " + System.getProperty("line.separator") + 
+					"**********" + System.getProperty("line.separator") 
+					+ event.completeEmployeeList);
+			completeEvent.append(System.getProperty("line.separator") + "##################################" +
+					System.getProperty("line.separator"));
+			return completeEvent;
+		}
 		//**************************************************************************
 		// SORTING OPTIONS
 		// NOTE: Modified method signature to take in a List...

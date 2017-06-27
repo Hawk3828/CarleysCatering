@@ -176,38 +176,20 @@ public class StaffDinnerEventAndCreateFile  {
 //						int x = 3;// location after the first three elements in the employeeList Array
 							for(int x = 0; x <= amountWaitStaff -1 ; ++x){// we started at 1 due to the initial WaitStaff
 								
-							String verifiyName = new WaitStaff().getName();
-//							
-//							employeeList.forEach ( p-> { if (p.getName() != verifiyName){ employeeList.add(new WaitStaff());
-//							}
-							
+							String verifiyName = new WaitStaff().getName();							
 							Iterator<Employee> it = employeeList.iterator();
 							
 							while(it.hasNext()){
-			
-								if (employeeList != null ){
-								employeeList.add(new WaitStaff());
-							}
+								Employee emp = it.next();
+
+							if (emp.getName()==verifiyName){
 								
+								}
 							}
-				
-////							for(Employee p: employeeList){
-////								
-////								if (p.getName()!=verifiyName){
-////									employeeList.add(new WaitStaff());
-////								}
-////							}
-////							
-//							employeeList.forEach ( p-> { if (p.getName() != verifiyName){
-//								
-//								employeeList.add(new WaitStaff());
-//							}
-//							
-//						});
-//							
-							key = true;
+								employeeList.add(new WaitStaff());
+					
 					}
-							
+							key = true;
 						}// end of while loop 
 					
 					//This while loop was  created for BarTender objects in the employeeList Array
@@ -264,7 +246,7 @@ public class StaffDinnerEventAndCreateFile  {
 
 			if (userReply.equalsIgnoreCase("N")){
 
-				//Advanced For Loop to traverse through objects and run display method on elements
+				//Advanced For Loop to integrate through objects and run display method on elements
 				for(DinnerEvent displayEvent: dinnerOption){
 					
 					// Implemented new  Sting join method  available in Java 8
@@ -279,12 +261,13 @@ public class StaffDinnerEventAndCreateFile  {
 						System.out.println();	
 					}else{
 						CarlysEventPriceWithMethods.displayStaffDinnerEventDetails(displayEvent);
-						completeDinnerEvent = CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent);
+						completeDinnerEvent.append(CarlysEventPriceWithMethods.createStaffDinnerEventDetails(displayEvent));
 						System.out.println();
 					}
 				}
 				isValid = true;
 			}
+			FinalDinnerEvent = completeDinnerEvent.toString();
 		}// end of While Loop
 		
 		

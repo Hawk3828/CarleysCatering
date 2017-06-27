@@ -80,7 +80,11 @@ public abstract class Employee {
 			empList.add("Janet Moore");
 			empList.add("Tyler Thomas");
 			empList.add("Danny Brown");
-			empList.add("April Miller");
+			empList.add("Von Rafer");
+			empList.add("Dwight Howard");
+			empList.add("Patrick Ewing");
+			empList.add("Chris Paul");
+			empList.add("Tracy McGrady");
 			return empList;
 		}
 		
