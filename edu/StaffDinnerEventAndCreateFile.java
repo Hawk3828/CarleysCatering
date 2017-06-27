@@ -35,6 +35,7 @@ public class StaffDinnerEventAndCreateFile  {
 	public static String FinalDinnerEvent = "";
 	public static String modifiedEvent = "";
 	public static File aFile;
+	private String customerName = null;
 	
 
 	
@@ -45,7 +46,7 @@ public class StaffDinnerEventAndCreateFile  {
  *********************************************************************/
 	public static void createConnection() throws IOException{
 		 //SQL statement for  handleButtonActionNewTR method line 
-	    String sql ="CREATE TABLE IF NOT EXISTS DinnerEvents (" +
+	    String sql ="CREATE TABLE IF NOT EXISTS dinnerevent (" +
 	    		  	"EventNumber varchar(255) NOT NULL,"+
 	    		  	"ContactNumber varchar(255) NOT NULL," +
 	    		  	"EventOption varchar (255) NOT NULL," +
@@ -137,6 +138,8 @@ public class StaffDinnerEventAndCreateFile  {
 	 	String customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
  		String eventNumber = null;
  		String contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
+ 		
+ 		
 	 	
  		while(!isValid){
 		
@@ -178,7 +181,8 @@ public class StaffDinnerEventAndCreateFile  {
 								
 							String verifiyName = new WaitStaff().getName();							
 							Iterator<Employee> it = employeeList.iterator();
-							
+						
+							// ATTEMPS TP ITERATE THOUGH SET TO VERIFY IF NAME IS IN SET
 							while(it.hasNext()){
 								Employee emp = it.next();
 
@@ -203,8 +207,6 @@ public class StaffDinnerEventAndCreateFile  {
 							}
 							key = true;
 					}// end of inner while loop
-					
-					
 					
 					
 					// Creates the Dinner Event object WITH CATERING
@@ -311,7 +313,7 @@ public class StaffDinnerEventAndCreateFile  {
 	
 	
 	/**********************************************************************
-	 * Writes the DinnerEvent to a 
+	 * Writes the DinnerEvent to a File File system path
 	 *********************************************************************/
 			
 			public static void writeListToFile(String FinalDinnerEvent, File aFile) throws Exception {
@@ -328,22 +330,17 @@ public class StaffDinnerEventAndCreateFile  {
 			}
 			
 			
-		 /********************************************************************************
+		 /***********************************************************
 		 * Driver MAIN	
 		 * @throws AlphaNumericException 
-		 * 
-		 * *******************************************************************************
-		 */
-			
+		 *************************************************************/
 		public static void main(String[] args) throws AlphaNumericException,Exception {
-			
-			createConnection();
 			Scanner scanner = new Scanner(System.in);
 			createDinnerEvent(scanner);
 		    scanner.close();
 		    aFile = createFile(FILENAME);
 			writeListToFile(FinalDinnerEvent,aFile);
-			
+			createConnection();
 		}	 	
 		
 		
