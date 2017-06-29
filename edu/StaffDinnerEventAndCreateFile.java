@@ -7,6 +7,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +36,18 @@ public class StaffDinnerEventAndCreateFile  {
 	private static String FinalDinnerEvent = "";
 	public static String modifiedEvent = "";
 	private static File aFile;
+	public static List<DinnerEvent> dinnerOption;
 	private static String customerName;
+	private static String eventNumber ;
+	private static String contactNumber ;
+	private static  String eventOption;
+	private static int numberOfGuests;
+	private static  Set<Employee> employeeList ;
+	private static int entree;  
+	private static int sideOne;
+	private static int sideTwo; 
+	private static int dessert;
+	private static String NoMenu ;
 	
 
 	
@@ -50,21 +62,53 @@ public class StaffDinnerEventAndCreateFile  {
 	    		  	"EventNumber varchar(255) NOT NULL,"+
 	    		  	"ContactNumber varchar(255) NOT NULL," +
 	    		  	"EventOption varchar (255) NOT NULL," +
-	    		  	"entree varchar(255) NOT NULL," +
-	    		  	"sideOne varchar(255) NOT NULL," +
-	    		  	"sidetwo varchar(255) NOT NULL," +
-	    		  	"dessert varchar(255) NOT NULL," +
 	    		  	"numberOfGuests int(100) NOT NULL," +
 	    		  	"employeeList varchar(255) NOT NULL," +
+	    		  	"NoMenu varchar (255)," +
+	    		  	"entree varchar (255)," +
+	    		  	"sideOne varchar(255)," +
+	    		  	"sideTwo varchar(255)," +
+	    		  	"dessert varchar(255)," +
 	    		  	"PRIMARY KEY (EventNumber)) "+
 	    		  	"ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ";
+	    
+	    String prepared = "INSERT INTO "+customerName+" (EventNumber, ContactNumber, EventOption, numberOfGuests, employeeList, NoMenu, entree, sideOne, sideTwo, dessert,) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+
 		
 		try(Connection conn =  DBUtil.getConnection(DBType.MYSQL);
 				Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
-														  ResultSet.CONCUR_READ_ONLY);){
-				stmt.executeUpdate(sql);
+														  ResultSet.CONCUR_READ_ONLY);
+				PreparedStatement preparedstatement = conn.prepareStatement(prepared)){
+
+				preparedstatement.setString(1, eventNumber);
+				preparedstatement.setString(2, contactNumber);
+				preparedstatement.setString(3, eventOption);
+				preparedstatement.setInt(4, numberOfGuests);
+				preparedstatement.setString( 5,dinnerOption.iterator().next().completeEmployeeList );
 				
-				System.out.println("Connected to Database!");
+//				StringBuilder dbEmployee = new StringBuilder("");
+//				
+//				dinnerOption.forEach ( p->  dbEmployee.append (p.completeEmployeeList));
+//				
+//					try {
+//						
+//						;
+//					} catch (SQLException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				
+				
+				preparedstatement.setString(6 ,NoMenu);
+				preparedstatement.setInt(7 ,entree);
+				preparedstatement.setInt(8 ,sideOne);
+				preparedstatement.setInt(9 ,sideTwo);
+				preparedstatement.setInt(10 ,dessert);
+				
+				stmt.executeUpdate(sql);
+				preparedstatement.executeUpdate();
+				
+				System.out.println("Record added to  Database!");
 		} catch (SQLException e) {
 					DBUtil.processException(e);
 					
@@ -123,7 +167,7 @@ public class StaffDinnerEventAndCreateFile  {
 	 *********************************************************************/
 	
 	public static void createDinnerEvent(final Scanner scanner) throws AlphaNumericException{
-	 	List<DinnerEvent> dinnerOption = new ArrayList<DinnerEvent> ();
+		dinnerOption = new ArrayList<DinnerEvent> ();
 		StringBuilder completeDinnerEvent = new StringBuilder(FinalDinnerEvent) ;
 		StringBuilder modifiedEventNumber = new StringBuilder("") ;
 		
@@ -137,14 +181,14 @@ public class StaffDinnerEventAndCreateFile  {
 		// I added this variable to create a unique event number...
 	 	customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
 	 	
- 		String eventNumber = null;
- 		String contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
+ 		eventNumber = null;
+ 		contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
  		
  		
 	 	
  		while(!isValid){
 		
-		 		String eventOption = CarlysEventPriceWithMethods.getEventOption(scanner);
+		 		eventOption = CarlysEventPriceWithMethods.getEventOption(scanner);
 		 		
 		 		System.out.println("Would You Like This Event Catered \nY: YES \nN: NO");
 				String userDinnerReply = scanner.next();
@@ -152,18 +196,18 @@ public class StaffDinnerEventAndCreateFile  {
 			if(userDinnerReply.equalsIgnoreCase("y")){
 				int[] dinnerAnswer = CarlysEventPriceWithMethods.userReplyToDinnerEvent(scanner);
 				
-				int entree =  dinnerAnswer[0];
-				int sideOne = dinnerAnswer[1];
-				int sideTwo = dinnerAnswer[2];
-				int dessert = dinnerAnswer[3];
+				entree =  dinnerAnswer[0];
+				sideOne = dinnerAnswer[1];
+				sideTwo = dinnerAnswer[2];
+				dessert = dinnerAnswer[3];
 				
-				int numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
-					numberOfGuests = verifyGuestCount(numberOfGuests);
+				numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
+				numberOfGuests = verifyGuestCount(numberOfGuests);
 					
 					/************************************************************************************************************
 					 * Uses Advance Data Structure example to create a Set that allows NO DUPS to prevent double employees on duty
 					 **************************************************************************************************************/
-					Set<Employee> employeeList = new HashSet<Employee>();
+					employeeList = new HashSet<Employee>();
 					employeeList.add(new Coordinator());
 					employeeList.add(new WaitStaff());
 					employeeList.add(new Bartender());
@@ -223,10 +267,10 @@ public class StaffDinnerEventAndCreateFile  {
 													dessert));
 			}else{
 					
-						String NoMenu = "You Chose Not To Have Your Event Catered!";
-						int numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
+						NoMenu = "You Chose Not To Have Your Event Catered!";
+						numberOfGuests = CarlysEventPriceWithMethods.getGuestCount(scanner);	
 						numberOfGuests = verifyGuestCount(numberOfGuests);
-						Set<Employee>employeeList = new HashSet<Employee>();
+						employeeList = new HashSet<Employee>();
 						employeeList.add(new Coordinator());
 						employeeList.add(new WaitStaff());
 						employeeList.add(new Bartender());
@@ -339,7 +383,7 @@ public class StaffDinnerEventAndCreateFile  {
 			Scanner scanner = new Scanner(System.in);
 			createDinnerEvent(scanner);
 		    scanner.close();
-		    aFile = createFile(FILENAME);
+//		    aFile = createFile(FILENAME);
 //			writeListToFile(FinalDinnerEvent,aFile);
 			createConnection();
 		}	 	
