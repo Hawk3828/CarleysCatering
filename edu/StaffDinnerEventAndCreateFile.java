@@ -32,10 +32,10 @@ public class StaffDinnerEventAndCreateFile  {
 	private final static int MIN_WAITSTAFF = 10;
 	private final static int MIN_BARSTAFF = 25;
 	private static String FILENAME = "Event_for_Hawkins Jean.txt";
-	public static String FinalDinnerEvent = "";
+	private static String FinalDinnerEvent = "";
 	public static String modifiedEvent = "";
-	public static File aFile;
-	private String customerName = null;
+	private static File aFile;
+	private static String customerName;
 	
 
 	
@@ -46,7 +46,7 @@ public class StaffDinnerEventAndCreateFile  {
  *********************************************************************/
 	public static void createConnection() throws IOException{
 		 //SQL statement for  handleButtonActionNewTR method line 
-	    String sql ="CREATE TABLE IF NOT EXISTS dinnerevent (" +
+	    String sql = "CREATE TABLE IF NOT EXISTS "+customerName+" (" +
 	    		  	"EventNumber varchar(255) NOT NULL,"+
 	    		  	"ContactNumber varchar(255) NOT NULL," +
 	    		  	"EventOption varchar (255) NOT NULL," +
@@ -65,11 +65,11 @@ public class StaffDinnerEventAndCreateFile  {
 				stmt.executeUpdate(sql);
 				
 				System.out.println("Connected to Database!");
-				} catch (SQLException e) {
+		} catch (SQLException e) {
 					DBUtil.processException(e);
-				}finally{
 					
-				}
+		}
+		
 	}
 	
 	
@@ -135,7 +135,8 @@ public class StaffDinnerEventAndCreateFile  {
 	 	System.out.println("Please Register Your Event:");
 	 	System.out.println();
 		// I added this variable to create a unique event number...
-	 	String customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
+	 	customerName = CarlysEventPriceWithMethods.getCustomerName(scanner);
+	 	
  		String eventNumber = null;
  		String contactNumber = CarlysEventPriceWithMethods.getContactNumber(scanner);
  		
@@ -339,7 +340,7 @@ public class StaffDinnerEventAndCreateFile  {
 			createDinnerEvent(scanner);
 		    scanner.close();
 		    aFile = createFile(FILENAME);
-			writeListToFile(FinalDinnerEvent,aFile);
+//			writeListToFile(FinalDinnerEvent,aFile);
 			createConnection();
 		}	 	
 		

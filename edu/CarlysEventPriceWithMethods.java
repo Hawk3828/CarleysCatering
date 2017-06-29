@@ -31,7 +31,7 @@ public class CarlysEventPriceWithMethods {
 		StringBuilder customername = new StringBuilder();
 		
 		customername.append(firstName);
-		customername.append(" ");
+		customername.append("_");
 		customername.append(lastName);
 		
 		customerName = customername.toString();
