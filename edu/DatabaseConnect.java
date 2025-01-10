@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DatabaseConnect {
 
 	private static final String USERNAME = "Hawk";
-	private static final String PASSWORD = "Maxzot3828##";
+	private static final String PASSWORD = "########";
 	private static final String CON_STRING = 
 						"jdbc:mysql://localhost/barcodefx";
 			
